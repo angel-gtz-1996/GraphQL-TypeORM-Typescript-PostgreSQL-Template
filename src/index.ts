@@ -24,10 +24,10 @@ const main = async () => {
 
     console.log("Connected to Postgres")
 
-    // Parse the body for every request that we made
+    // Parse the body for every request that we make
     app.use(express.json())
 
-    // Create client router
+    // Use routes
     app.use(routes)
 
     app.listen(8080, () => {

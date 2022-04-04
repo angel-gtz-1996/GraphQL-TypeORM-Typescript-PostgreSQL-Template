@@ -24,3 +24,17 @@ export const createClient = async (req: express.Request, res: express.Response) 
 
   return res.json(client);
 }
+
+export const deleteClient = async (req: express.Request, res: express.Response) => {
+  const { clientId } = req.params
+
+  if (!clientId) {
+    return res.json({
+      msg: "Client ID format is invalid"
+    })
+  }
+
+  const response = await Client.delete(parseInt(clientId))
+
+  return res.json(response)
+}

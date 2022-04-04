@@ -1,6 +1,7 @@
 
-import { Banker } from "../entities/Banker"
 import express from "express"
+import { Banker } from "../entities/Banker"
+import { Client } from "../entities/Client"
 
 export const createBanker = async (req: express.Request, res: express.Response) => {
   const {
@@ -24,4 +25,31 @@ export const createBanker = async (req: express.Request, res: express.Response) 
   await banker.save()
 
   return res.json(banker)
+}
+
+export const connectBankToClient = async (req: express.Request, res: express.Response) => {
+  // URL params
+  const { bankerId, clientId } = req.params
+
+  const client = await Client.findOne(parseInt(clientId))
+  const banker = await Banker.findOne(parseInt(bankerId))
+
+  console.log(client, banker);
+
+  if (!banker || !client) {
+    return res.json({
+      msg: "Banker or client not found"
+    })
+  }
+
+  //Update value
+  banker.clients = [
+    client
+  ]
+
+  await banker.save()
+
+  return res.json({
+    msg: "Banker connected to client"
+  })
 }
