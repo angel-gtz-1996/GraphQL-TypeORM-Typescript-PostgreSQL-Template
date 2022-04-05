@@ -5,8 +5,12 @@ import * as clientCtrl from "../../controllers/clientController";
 const router = express.Router()
 
 // Example of a route (path and callback)
-router.post('/', clientCtrl.createClient)
-router.delete('/:clientId', clientCtrl.deleteClient)
+router
+  .get('/', clientCtrl.getClients)
+  .post('/', clientCtrl.createClient)
+router
+  .get('/:clientId', clientCtrl.getClientById)
+  .delete('/:clientId', clientCtrl.deleteClient)
 
 export {
   router as clientRoute

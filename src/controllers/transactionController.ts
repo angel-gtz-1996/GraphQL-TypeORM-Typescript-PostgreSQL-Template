@@ -24,9 +24,9 @@ export const createTransaction = async (req: express.Request , res: express.Resp
   await transaction.save()
 
   if (type === TransactionTypes.DEPOSIT) {
-    client.balance = client.balance + amount
+    client.balance = client.balance as number + amount
   } else if (type === TransactionTypes.WITHDRAW) {
-    client.balance = client.balance - amount
+    client.balance = client.balance as number - amount
   }
 
   await client.save()
