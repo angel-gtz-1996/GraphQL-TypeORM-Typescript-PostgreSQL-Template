@@ -1,17 +1,11 @@
-import express from "express"
-import * as clientCtrl from "../../controllers/clientController";
+import express from 'express';
+import * as clientCtrl from '../../controllers/clientController';
 
 // create a route express
-const router = express.Router()
+const router = express.Router();
 
 // Example of a route (path and callback)
-router
-  .get('/', clientCtrl.getClients)
-  .post('/', clientCtrl.createClient)
-router
-  .get('/:clientId', clientCtrl.getClientById)
-  .delete('/:clientId', clientCtrl.deleteClient)
+router.get('/', clientCtrl.getClients).post('/', clientCtrl.createClient);
+router.get('/:clientId', clientCtrl.getClientById).delete('/:clientId', clientCtrl.deleteClient);
 
-export {
-  router as clientRoute
-}
+export { router as clientRoute };

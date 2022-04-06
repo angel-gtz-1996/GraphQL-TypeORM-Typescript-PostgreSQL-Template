@@ -6,18 +6,18 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn
-} from "typeorm";
-import { Client } from "./Client";
+  JoinColumn,
+} from 'typeorm';
 import { Field, Int, ObjectType } from 'type-graphql';
+import { Client } from './Client';
 
 export enum TransactionTypes {
-  DEPOSIT = "deposit",
-  WITHDRAW = "withdraw"
+  DEPOSIT = 'deposit',
+  WITHDRAW = 'withdraw',
 }
 
-@ObjectType({ description: "Transaction Model" })
-@Entity("transactions")
+@ObjectType({ description: 'Transaction Model' })
+@Entity('transactions')
 export class Transaction extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
@@ -26,30 +26,26 @@ export class Transaction extends BaseEntity {
   // column enum
   @Field(() => String)
   @Column({
-    type: "enum",
-    enum: TransactionTypes
+    type: 'enum',
+    enum: TransactionTypes,
   })
   type: string;
 
   @Field(() => Int)
   @Column({
-    type: "numeric"
+    type: 'numeric',
   })
   amount: number;
 
   // ManyToOne relation
   @Field(() => Client)
-  @ManyToOne(
-    () => Client,
-    client => client.transactions,
-    {
-      onDelete: "CASCADE"
-    }
-  )
-  @JoinColumn({
-    name: 'client_id'
+  @ManyToOne(() => Client, client => client.transactions, {
+    onDelete: 'CASCADE',
   })
-  client: Client
+  @JoinColumn({
+    name: 'client_id',
+  })
+  client: Client;
 
   // Every time a record is saved for first time, add automatically created_at field
   @Field(() => Date)

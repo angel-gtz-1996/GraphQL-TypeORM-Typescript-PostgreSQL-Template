@@ -1,22 +1,22 @@
-import express from "express";
-import { routes } from "./REST/routes/index";
-import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import { routes } from './REST/routes/index';
 
 export const startServer = async () => {
   const app = express();
 
-  //GraphQL server
+  // GraphQL server
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [__dirname + '/GraphQL/resolvers/**/*.ts']
+      resolvers: [`${__dirname}/GraphQL/resolvers/**/*.ts`],
     }),
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
   });
 
   await apolloServer.start();
 
-  apolloServer.applyMiddleware({ app, path: "/graphql" });
+  apolloServer.applyMiddleware({ app, path: '/graphql' });
 
   // Parse the body for every request that we make
   app.use(express.json());
@@ -25,4 +25,4 @@ export const startServer = async () => {
   app.use(routes);
 
   return app;
-}
+};

@@ -1,12 +1,12 @@
-import express from "express"
-import { bankerRoute } from "./bankerRoute";
-import { clientRoute } from "./clientRoute";
-import { transactionRoute } from "./transactionRoute";
+import express from 'express';
+import { bankerRoute } from './bankerRoute';
+import { clientRoute } from './clientRoute';
+import { transactionRoute } from './transactionRoute';
 
-const router = express.Router()
+const router = express.Router();
 
-router.use("/client", clientRoute)
-router.use("/banker", bankerRoute)
-router.use("/", transactionRoute)
+router.use('/client', clientRoute);
+router.use('/banker', bankerRoute);
+router.use('/', transactionRoute);
 
-export { router }
+export { router };

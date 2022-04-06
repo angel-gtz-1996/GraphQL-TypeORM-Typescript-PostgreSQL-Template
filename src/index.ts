@@ -1,6 +1,6 @@
-import { DBconnection } from "./config/typeORM"
-import { startServer } from "./app"
-import "dotenv/config"
+import { DBconnection } from './config/typeorm';
+import { startServer } from './app';
+import 'dotenv/config';
 
 const PORT = 8080;
 
@@ -9,11 +9,11 @@ const main = async () => {
   DBconnection();
 
   // Start graphQL server && Rest API
-  const app = await startServer()
+  const app = await startServer();
 
   app.listen(8080, () => {
-    console.log(`App running on port ${PORT}`)
-  })
-}
+    console.log(`App running on port ${PORT}`);
+  });
+};
 
-main()
+main();
