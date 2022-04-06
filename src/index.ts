@@ -1,42 +1,19 @@
-import express from "express"
-import { createConnection } from "typeorm"
-import { Banker } from "./entities/Banker"
-import { Client } from "./entities/Client"
-import { Transaction } from "./entities/Transaction"
-import { routes } from "./routes/index"
+import { DBconnection } from "./config/typeORM"
+import { startServer } from "./app"
+import "dotenv/config"
 
-const app = express();
+const PORT = 8080;
 
 const main = async () => {
-  try {
-    await createConnection({
-      type: "postgres",
-      host: "localhost",
-      port: 5432,
-      username: "postgres",
-      password: undefined,
-      database: "typeorm",
-      // All my entities, entity = table in postgres
-      entities: [Client, Banker, Transaction],
-      // Syncronize all my entities with my Database
-      synchronize: true
-    })
+  // Database connection
+  DBconnection();
 
-    console.log("Connected to Postgres")
+  // Start graphQL server && Rest API
+  const app = await startServer()
 
-    // Parse the body for every request that we make
-    app.use(express.json())
-
-    // Use routes
-    app.use(routes)
-
-    app.listen(8080, () => {
-      console.log("App running on port 8080");
-    })
-  } catch (error) {
-    console.error(error)
-    throw new Error("Unable to connect to Postgres")
-  }
+  app.listen(8080, () => {
+    console.log(`App running on port ${PORT}`)
+  })
 }
 
 main()

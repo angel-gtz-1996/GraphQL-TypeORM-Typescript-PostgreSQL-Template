@@ -1,8 +1,8 @@
 import express from "express";
-import { Client } from "../entities/Client";
-import { Transaction, TransactionTypes } from "../entities/Transaction";
+import { Client } from "../../entities/Client";
+import { Transaction, TransactionTypes } from "../../entities/Transaction";
 
-export const createTransaction = async (req: express.Request , res: express.Response) => {
+export const createTransaction = async (req: express.Request, res: express.Response) => {
   const { clientId } = req.params;
 
   const { type, amount } = req.body;

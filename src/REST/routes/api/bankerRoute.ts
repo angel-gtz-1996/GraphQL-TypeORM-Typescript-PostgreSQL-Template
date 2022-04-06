@@ -9,5 +9,5 @@ router.post('/', bankerCtrl.createBanker)
 router.put('/:bankerId/client/:clientId', bankerCtrl.connectBankToClient)
 
 export {
-  router as bankerRoute 
+  router as bankerRoute
 }

@@ -1,6 +1,6 @@
-import express from "express"
-import { Client } from "../entities/Client"
-import { createQueryBuilder } from "typeorm"
+import express from "express";
+import { Client } from "../../entities/Client";
+import { createQueryBuilder } from "typeorm";
 
 export const createClient = async (req: express.Request, res: express.Response) => {
   const {

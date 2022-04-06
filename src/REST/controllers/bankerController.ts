@@ -1,7 +1,7 @@
 
 import express from "express"
-import { Banker } from "../entities/Banker"
-import { Client } from "../entities/Client"
+import { Banker } from "../../entities/Banker"
+import { Client } from "../../entities/Client"
 
 export const createBanker = async (req: express.Request, res: express.Response) => {
   const {
